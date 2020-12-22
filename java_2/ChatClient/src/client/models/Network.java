@@ -84,7 +84,11 @@ public class Network {
                        String sender = data.getSender();
                        String formattedMessage = sender != null ? String.format("%s: %s", sender, message) : message;
                        Platform.runLater(() -> {
-                           chatController.appendMessage(formattedMessage);
+                           try {
+                               chatController.appendMessage(formattedMessage);
+                           } catch (IOException e) {
+                               e.printStackTrace();
+                           }
                        });
                        break;
                    }
